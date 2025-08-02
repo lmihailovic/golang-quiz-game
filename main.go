@@ -34,7 +34,10 @@ func main() {
 		fmt.Printf("Problem #%d: %v = ", i+1, strings[0])
 
 		var guess string
-		fmt.Scanln(&guess)
+		_, err := fmt.Scanln(&guess)
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		if guess == strings[1] {
 			score += 1
