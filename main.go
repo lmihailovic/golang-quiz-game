@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -28,7 +29,7 @@ func ReadCSV(filename string) [][]string {
 }
 
 func EndGame(score int, totalProblems int) {
-	fmt.Printf("\nYour scored: %v out of %v\n", score, totalProblems)
+	fmt.Printf("\nYou scored: %v out of %v\n", score, totalProblems)
 	os.Exit(0)
 }
 
@@ -41,14 +42,14 @@ func main() {
 	score := 0
 
 	fmt.Println("Press any key to start.")
-	fmt.Scanln()
+	fmt.Scanln() // no need to check for errors
 
 	time.AfterFunc(time.Duration(*gameTime)*time.Second, func() {
 		EndGame(score, len(records))
 	})
 
-	for i, strings := range records {
-		fmt.Printf("Problem #%d: %v = ", i+1, strings[0])
+	for i, problem := range records {
+		fmt.Printf("Problem #%d: %v = ", i+1, problem[0])
 
 		var answer string
 		_, err := fmt.Scanln(&answer)
@@ -56,7 +57,10 @@ func main() {
 			log.Fatal(err)
 		}
 
-		if answer == strings[1] {
+		answer = strings.Trim(answer, " ")
+		answer = strings.ToLower(answer)
+
+		if answer == problem[1] {
 			score += 1
 		}
 	}
