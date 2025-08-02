@@ -1,6 +1,6 @@
 # Quiz Game (golang)
 The first project following the [Gophercises](https://gophercises.com/) course
-for learning Go.
+for practicing and mastering Go.
 
 ## How it works
 The program reads a CSV file, where the first field is the question, and the
