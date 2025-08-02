@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"math/rand/v2"
 	"os"
 	"strings"
 	"time"
@@ -36,6 +37,8 @@ func EndGame(score int, totalProblems int) {
 func main() {
 	problemsFile := flag.String("f", "problems.csv", "path to problems file")
 	gameTime := flag.Int("t", 30, "time to play in seconds")
+	shuffle := flag.Bool("s", false, "shuffle the problems list")
+
 	flag.Parse()
 
 	records := ReadCSV(*problemsFile)
@@ -47,6 +50,12 @@ func main() {
 	time.AfterFunc(time.Duration(*gameTime)*time.Second, func() {
 		EndGame(score, len(records))
 	})
+
+	if *shuffle == true {
+		rand.Shuffle(len(records), func(i, j int) {
+			records[i], records[j] = records[j], records[i]
+		})
+	}
 
 	for i, problem := range records {
 		fmt.Printf("Problem #%d: %v = ", i+1, problem[0])
