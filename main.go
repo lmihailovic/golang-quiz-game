@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/csv"
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -26,9 +27,11 @@ func ReadCSV(filename string) [][]string {
 }
 
 func main() {
-	score := 0
+	problemsFile := flag.String("file", "problems.csv", "path to problems file")
+	flag.Parse()
 
-	records := ReadCSV("problems.csv")
+	records := ReadCSV(*problemsFile)
+	score := 0
 
 	for i, strings := range records {
 		fmt.Printf("Problem #%d: %v = ", i+1, strings[0])
@@ -42,7 +45,6 @@ func main() {
 		if answer == strings[1] {
 			score += 1
 		}
-
 	}
 
 	fmt.Printf("Your scored: %v out of %v\n", score, len(records))
