@@ -33,13 +33,13 @@ func main() {
 	for i, strings := range records {
 		fmt.Printf("Problem #%d: %v = ", i+1, strings[0])
 
-		var guess string
-		_, err := fmt.Scanln(&guess)
+		var answer string
+		_, err := fmt.Scanln(&answer)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		if guess == strings[1] {
+		if answer == strings[1] {
 			score += 1
 		}
 
