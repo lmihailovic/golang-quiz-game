@@ -22,3 +22,8 @@ their score against the total number of questions, and the program stops.
 -t int
         time to play in seconds (default 30)
 ```
+
+## Bonus
+- [x] Add string trimming and cleanup to help ensure that correct answers with extra whitespace capitalization, etc are not considered incorrect. 
+- [x] Add an option (a new flag) to shuffle the quiz order each time it is run.
+
